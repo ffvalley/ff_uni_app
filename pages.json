@@ -1,0 +1,71 @@
+{
+	"pages": [{
+			"path": "pages/login/login",
+			"style": {}
+		},
+		{
+			"path": "pages/tabbar/home/home",
+			"style": {}
+		},
+		{
+			"path": "pages/tabbar/record/record",
+			"style": {}
+		},
+		{
+			"path": "pages/tabbar/me/me",
+			"style": {}
+		},
+		{
+			"path": "pages/record/recordIncome/recordIncome",
+			"style": {
+				"navigationBarTitleText": "记录 - 收入"
+			}
+		},
+		{
+			"path": "pages/record/recordPay/recordPay",
+			"style": {
+				"navigationBarTitleText": "记录 - 支出"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "飞鱼谷随心记",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"borderStyle": "black",
+		"backgroundColor": "#333",
+		"color": "#8F8F94",
+		"selectedColor": "#f33e54",
+		"list": [{
+				"pagePath": "pages/tabbar/home/home",
+				"iconPath": "static/img/tabbar/home.png",
+				"selectedIconPath": "static/img/tabbar/home_active.png",
+				"text": "首页"
+			},
+			//#ifdef MP-WEIXIN
+			{
+				"pagePath": "pages/tabbar/record/record",
+				"iconPath": "static/img/tabbar/add.png",
+				"selectedIconPath": "static/img/tabbar/add_active.png",
+				"text": "记一笔"
+			},
+			//#endif
+			//#ifndef MP-WEIXIN
+			{
+				"pagePath": "pages/tabbar/record/record",
+				"iconPath": "static/img/tabbar/add.png",
+				"selectedIconPath": "static/img/tabbar/add_active.png"
+			},
+			//#endif
+			{
+				"pagePath": "pages/tabbar/me/me",
+				"iconPath": "static/img/tabbar/me.png",
+				"selectedIconPath": "static/img/tabbar/me_active.png",
+				"text": "我"
+			}
+		]
+	}
+}
