@@ -7,10 +7,11 @@
 </template>
 
 <script>
-	const net = require('../../net/net.js');
-	const api = require('../../net/api.js');
-	const netCode = require('../../net/netCode.js');
-	const enums = require('../../enum/enums.js');
+	const net = require('../../common/net/net.js');
+	const api = require('../../common/net/api.js');
+	const netCode = require('../../common/net/netCode.js');
+	const enums = require('../../common/enums.js');
+	const router = require('../../common/router.js');
 	const app = getApp();
 	export default {
 		data() {
@@ -31,7 +32,7 @@
 				})
 			},
 			// 微信小程序用户授权
-			getAuthInfo:function(code){
+			getAuthInfo: function(code) {
 				let that = this
 				uni.getSetting({
 					success: res => {
@@ -57,25 +58,19 @@
 					}
 				})
 			},
-			
 			// 私服用户登录
 			netLogin: function(params) {
 				let that = this;
-				// net.formPost(api.wechat.login, params, () => {
-				net.postRequest(api.wechat.login, params, () => {
+				net.requestJson(api.wechat.login, params, net.methodType.post, () => {
 					uni.showLoading({
 						title: '正在加载',
 					})
 				}, (data) => {
 					uni.hideLoading()
-					uni.setStorageSync(enums.cacheKey.custInfo, data)
-					if (!data.phone) {
-						// getPhone()
-					}
-					console.log("api.wechat.login: ", data)
-				}, (res) => {
-					// uni.hideLoading()
-				})
+					uni.setStorageSync(enums.cacheKey.CUST_INFO, data)
+					console.log("enums.cacheKey.CUST_INFO: ", uni.getStorageSync(enums.cacheKey.CUST_INFO))
+					router.toPage('/pages/tabbar/home/home', null, router.routerType.SWITCH_TAB)
+				}, (res) => {})
 			},
 		}
 	}

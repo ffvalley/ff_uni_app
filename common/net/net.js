@@ -1,31 +1,30 @@
 const netCode = require('./netCode.js');
-const enums = require('../enum/enums.js');
-
+const enums = require('../enums.js');
 /**
- * 供外部POST请求调用
- */
-function postRequest(url, params, onStart, onSuccess, onFailed) {
-	request(url, params, "POST", onStart, onSuccess, onFailed)
+ * 网络请求类型
+ * */
+const methodType = {
+	/**
+	 * Get网络请求
+	 * */
+	get: 'GET',
+	/**
+	 * Post网络请求
+	 * */
+	post: 'POST'
 }
 
 /**
- * 供外部GET请求调用
- */
-function getRequest(url, params, onStart, onSuccess, onFailed) {
-	request(url, params, "GET", onStart, onSuccess, onFailed);
-}
-
-/**
- * function: 封装网络请求（JSON格式）
- * @url URL地址
- * @params 请求参数
- * @method 请求方式：GET/POST
- * @onStart 开始请求,初始加载loading等处理
- * @onSuccess 成功回调
- * @onFailed  失败回调
- */
-function request(url, params, method, onStart, onSuccess, onFailed) {
-	var data = uni.getStorageSync(enums.cacheKey.custInfo)
+ * @description JSON格式网络请求
+ * @param {String} url = [请求URL]
+ * @param {Object} params = [请求参数]
+ * @param {methodType} method = [请求方法类型]
+ * @param {function} onStart = [开始请求, 初始加载loading等处理]
+ * @param {function} onSuccess = [成功回调]
+ * @param {function} onFailed = [失败回调]
+ * */
+function requestJson(url, params, method, onStart, onSuccess, onFailed) {
+	var data = uni.getStorageSync(enums.cacheKey.CUST_INFO)
 	var token = data.token
 
 	onStart(); //request start
@@ -40,9 +39,9 @@ function request(url, params, method, onStart, onSuccess, onFailed) {
 		success: function(res) {
 			console.log(res.data)
 			if (res.data.code) {
-				if (res.data.code == enums.code.REQUEST_SUCCESS) {
+				if (res.data.code == netCode.REQUEST_SUCCESS) {
 					onSuccess(res.data.data);
-				} else if (res.data.code === enums.code.REQUEST_TOKEN_INVALID) {
+				} else if (res.data.code === netCode.REQUEST_TOKEN_INVALID) {
 					// 重新登录处理
 					let url = '/pages/login/login'
 				} else {
@@ -70,17 +69,18 @@ function request(url, params, method, onStart, onSuccess, onFailed) {
 		}
 	})
 }
+
 /**
- * function: 封装网络请求（formdata格式）
- * @url URL地址
- * @params 请求参数
- * @method 请求方式：GET/POST
- * @onStart 开始请求,初始加载loading等处理
- * @onSuccess 成功回调
- * @onFailed  失败回调
- */
-function formPost(url, params, onStart, onSuccess, onFailed) {
-	var data = uni.getStorageSync(enums.cacheKey.custInfo)
+ * @description JSON格式网络请求
+ * @param {String} url = [请求URL]
+ * @param {Object} params = [请求参数]
+ * @param {methodType} method = [请求方法类型]
+ * @param {function} onStart = [开始请求, 初始加载loading等处理]
+ * @param {function} onSuccess = [成功回调]
+ * @param {function} onFailed = [失败回调]
+ * */
+function requestForm(url, params, method, onStart, onSuccess, onFailed) {
+	var data = uni.getStorageSync(enums.cacheKey.CUST_INFO)
 	var token = data.token
 
 	onStart()
@@ -95,16 +95,16 @@ function formPost(url, params, onStart, onSuccess, onFailed) {
 	uni.request({
 		url: url,
 		data: str,
-		method: 'POST',
+		method: method,
 		header: {
 			'content-type': 'multipart/form-data;boundary=XXX',
 			'token': token
 		},
 		success: function(res) {
 			if (res.data.code) {
-				if (res.data.code === enums.code.REQUEST_SUCCESS) {
+				if (res.data.code === netCode.REQUEST_SUCCESS) {
 					onSuccess(res.data.data);
-				} else if (res.data.code === enums.code.REQUEST_TOKEN_INVALID) {
+				} else if (res.data.code === netCode.REQUEST_TOKEN_INVALID) {
 					let url = '/pages/login/login'
 				} else {
 					uni.showToast({
@@ -134,7 +134,7 @@ function formPost(url, params, onStart, onSuccess, onFailed) {
 }
 
 module.exports = {
-	postRequest: postRequest,
-	getRequest: getRequest,
-	formPost: formPost
+	requestJson,
+	requestForm,
+	methodType
 }
