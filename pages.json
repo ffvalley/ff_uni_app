@@ -1,8 +1,5 @@
 {
-	"pages": [{
-			"path": "pages/login/login",
-			"style": {}
-		},
+	"pages": [
 		{
 			"path": "pages/tabbar/home/home",
 			"style": {}
@@ -13,6 +10,9 @@
 		},
 		{
 			"path": "pages/tabbar/me/me",
+			"style": {}
+		},{
+			"path": "pages/login/login",
 			"style": {}
 		},
 		{

@@ -1,5 +1,6 @@
 const netCode = require('./netCode.js');
 const enums = require('../enums.js');
+const router = require('../router.js');
 /**
  * 网络请求类型
  * */
@@ -42,8 +43,8 @@ function requestJson(url, params, method, onStart, onSuccess, onFailed) {
 				if (res.data.code == netCode.REQUEST_SUCCESS) {
 					onSuccess(res.data.data);
 				} else if (res.data.code === netCode.REQUEST_TOKEN_INVALID) {
-					// 重新登录处理
 					let url = '/pages/login/login'
+					router.toPage(url, null, router.routerType.REDIRECT_TO)
 				} else {
 					uni.showToast({
 						title: '网络连接异常',
@@ -106,6 +107,7 @@ function requestForm(url, params, method, onStart, onSuccess, onFailed) {
 					onSuccess(res.data.data);
 				} else if (res.data.code === netCode.REQUEST_TOKEN_INVALID) {
 					let url = '/pages/login/login'
+					router.toPage(url, null, router.routerType.REDIRECT_TO)
 				} else {
 					uni.showToast({
 						title: '网络连接异常',
