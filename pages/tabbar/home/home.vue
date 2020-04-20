@@ -17,7 +17,7 @@
 			test: function() {
 				let that = this;
 				let params = {};
-				net.requestJson('http://localhost:8002/ff-basic/test/token', params, net.methodType.post, () => {
+				net.requestJson('https://www.ffvalley.com:8002/ff-basic/test/token', params, net.methodType.post, () => {
 					uni.showLoading({
 						title: '正在加载',
 					})
