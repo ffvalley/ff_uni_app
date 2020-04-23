@@ -1,8 +1,6 @@
 <template>
 	<view class="page-container">
-		<view class="login-btn-container">
-			<button class="login-btn" open-type="getUserInfo" @getuserinfo="onLogin">授权登录</button>
-		</view>
+		<button class="login-btn" open-type="getUserInfo" @getuserinfo="onLogin">授权登录</button>
 	</view>
 </template>
 
@@ -88,25 +86,18 @@
 		justify-content: center;
 	}
 
-	.login-btn-container {
-		display: flex;
-		width: 100%;
-		flex-direction: row;
-		justify-content: center;
-		margin-top: 10%;
-	}
-
 	.login-btn {
-		font-size: 36upx;
-		color: white;
 		margin: 20upx;
-		width: 90%;
 		height: 90upx;
+		width: 90vw;
 		background: linear-gradient(130deg, rgba(32, 193, 41, 1) 0%, rgba(50, 161, 56, 1) 100%);
-		box-shadow: 0px 2px 4px 0px rgba(47, 167, 53, 0.5);
-		border-radius: 10px;
+		box-shadow: 0 4upx 8upx 0 rgba(47, 167, 53, 0.5);
+		border-radius: 20upx;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+
+		font-size: 36upx;
+		color: white;
 	}
 </style>

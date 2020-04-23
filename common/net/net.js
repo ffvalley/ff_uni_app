@@ -38,7 +38,6 @@ function requestJson(url, params, method, onStart, onSuccess, onFailed) {
 			'token': token
 		},
 		success: function(res) {
-			console.log(res.data)
 			if (res.data.code) {
 				if (res.data.code == netCode.REQUEST_SUCCESS) {
 					onSuccess(res.data.data);

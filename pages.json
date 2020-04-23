@@ -1,5 +1,8 @@
 {
-	"pages": [
+	"pages": [{
+			"path": "pages/tabbar/me/me",
+			"style": {}
+		},
 		{
 			"path": "pages/tabbar/home/home",
 			"style": {}
@@ -9,9 +12,6 @@
 			"style": {}
 		},
 		{
-			"path": "pages/tabbar/me/me",
-			"style": {}
-		},{
 			"path": "pages/login/login",
 			"style": {}
 		},
@@ -27,10 +27,14 @@
 				"navigationBarTitleText": "记录 - 支出"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/book/bookManage/bookManage",
+            "style" : {}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "飞鱼谷随心记",
+		"navigationBarTitleText": "新建",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
