@@ -1,16 +1,32 @@
 <template>
 	<view class="page-container">
-		<view class="menu-list-container" v-if="bookList.length>0">
-			<view class="item_container" v-for="(item, index) in bookList" :key='index'>
-				<image class="icon" src="/static/img/me/icon_account_book.png"></image>
-				<text class="title">{{item.bookName}}</text>
-				<text class="num">参与 {{item.count}}人</text>
-				<image class="next" src="/static/img/common/icon_next_right.png"></image>
+		<view class="page-container">
+			<view class="menu-list-container" v-if="bookList.length>0">
+				<view class="item_container" v-for="(item, index) in bookList" :key='index'>
+					<image class="icon" src="/static/img/me/icon_account_book.png"></image>
+					<text class="title">{{item.bookName}}</text>
+					<text class="num">参与 {{item.count}}人</text>
+					<image class="next" src="/static/img/common/icon_next_right.png"></image>
+				</view>
 			</view>
+			<view class="seat"></view>
+			<view class="btn-container" @tap="onShowDialog(true)">
+				新建账本
+			</view>
+
 		</view>
-		<view class="seat"></view>
-		<view class="btn-container" @tap="onCreateBook">
-			新建账本
+		<view class="dialog-container" v-if="isShowDialog" @tap="onShowDialog(false)">
+			<view class="content-container">
+				<view class="title">新建账本</view>
+				<view>
+					<view>账本昵称</view>
+					<input />
+				</view>
+				<view>
+					<view>取消</view>
+					<view>确认</view>
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -24,7 +40,8 @@
 	export default {
 		data() {
 			return {
-				bookList: []
+				bookList: [],
+				isShowDialog: false
 			};
 		},
 		onShow() {
@@ -43,8 +60,13 @@
 					uni.hideLoading()
 				}, (res) => {})
 			},
+			// 显示Dialog
+			onShowDialog: function(val) {
+				this.isShowDialog = val
+			},
 			// 创建新账本
 			onCreateBook: function() {
+
 				let that = this
 				let params = {
 					// bookName: '测试账本-哈哈02'
@@ -131,6 +153,37 @@
 				width: 16upx;
 				margin-right: 40upx;
 				margin-left: 20upx;
+			}
+		}
+	}
+
+	// Dialog
+	.dialog-container {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		z-index: 2;
+		background: $uni-color-black-transparent;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		.content-container {
+			width: 630upx;
+			min-height: 640upx;
+			background: $uni-color-white;
+			border-radius: 20upx;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			.title {
+				font-size: 32upx;
+				font-weight: 600;
+				color: $uni-color-black;
+				margin: 40upx 0;
 			}
 		}
 	}

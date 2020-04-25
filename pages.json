@@ -26,12 +26,14 @@
 			"style": {
 				"navigationBarTitleText": "记录 - 支出"
 			}
+		}, {
+			"path": "pages/book/bookManage/bookManage",
+			"style": {}
+		}, {
+			"path": "pages/book/bookDetail/bookDetail",
+			"style": {}
 		}
-	    ,{
-            "path" : "pages/book/bookManage/bookManage",
-            "style" : {}
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "新建",
