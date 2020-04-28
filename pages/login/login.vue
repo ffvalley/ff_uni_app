@@ -1,6 +1,6 @@
 <template>
 	<view class="page-container">
-		<button class="login-btn" open-type="getUserInfo" @getuserinfo="onLogin">授权登录</button>
+		<button class="common-button-enable login-btn" open-type="getUserInfo" @getuserinfo="onLogin">授权登录</button>
 	</view>
 </template>
 
@@ -87,17 +87,6 @@
 	}
 
 	.login-btn {
-		margin: 20upx;
-		height: 90upx;
 		width: 90vw;
-		background: linear-gradient(130deg, rgba(32, 193, 41, 1) 0%, rgba(50, 161, 56, 1) 100%);
-		box-shadow: 0 4upx 8upx 0 rgba(47, 167, 53, 0.5);
-		border-radius: 20upx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-
-		font-size: 36upx;
-		color: white;
 	}
 </style>

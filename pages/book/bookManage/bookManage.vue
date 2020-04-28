@@ -10,21 +10,19 @@
 				</view>
 			</view>
 			<view class="seat"></view>
-			<view class="btn-container" @tap="onShowDialog(true)">
-				新建账本
-			</view>
-
+			<view class="common-button-enable" style="width: 90%;" @tap="onShowDialog(true)">新建账本</view>
 		</view>
-		<view class="dialog-container" v-if="isShowDialog" @tap="onShowDialog(false)">
+		
+		<view class="common-mongolia-container" v-if="isShowDialog" @tap="onShowDialog(false)">
 			<view class="content-container">
 				<view class="title">新建账本</view>
-				<view>
+				<view class="content">
 					<view>账本昵称</view>
 					<input />
 				</view>
-				<view>
-					<view>取消</view>
-					<view>确认</view>
+				<view class="common-row-container" style="width: 600upx;">
+					<view class="common-button-unable" style="flex: 1;">取消</view>
+					<view class="common-button-enable" style="flex: 1;">确认</view>
 				</view>
 			</view>
 		</view>
@@ -95,22 +93,7 @@
 	// 占位符
 	.seat {
 		flex: 1;
-	}
-
-	// 新建按钮
-	.btn-container {
-		width: 90%;
-		height: 90upx;
-		margin: 20upx;
-		background: linear-gradient(130deg, $uni-color-green-light 0%, $uni-color-green 100%);
-		box-shadow: 0 4upx 8upx 0 $uni-color-green-shadow;
-		border-radius: $uni-border-radius;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-
-		font-size: $uni-font-size-large;
-		color: $uni-color-white;
+		width: 100vw;
 	}
 
 	// 账本列表
@@ -158,33 +141,26 @@
 	}
 
 	// Dialog
-	.dialog-container {
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		z-index: 2;
-		background: $uni-color-black-transparent;
+	.content-container {
+		width: 630upx;
+		min-height: 640upx;
+		background: $uni-color-white;
+		border-radius: 20upx;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
+		justify-content: center;
 
-		.content-container {
+		.title {
+			font-size: 32upx;
+			font-weight: 600;
+			color: $uni-color-black;
+			margin: 40upx 0;
+		}
+
+		.content {
+			flex: 1;
 			width: 630upx;
-			min-height: 640upx;
-			background: $uni-color-white;
-			border-radius: 20upx;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-
-			.title {
-				font-size: 32upx;
-				font-weight: 600;
-				color: $uni-color-black;
-				margin: 40upx 0;
-			}
 		}
 	}
 </style>
