@@ -1,5 +1,11 @@
 <template>
 	<view class="page-container">
+
+		<view class="userinfo-avatar">
+			<open-data type="userAvatarUrl"></open-data>
+		</view>
+		<open-data type="userNickName" style="margin: 20upx 0 350upx 0"></open-data>
+
 		<button class="common-button-enable login-btn" open-type="getUserInfo" @getuserinfo="onLogin">授权登录</button>
 	</view>
 </template>
@@ -84,6 +90,18 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+	}
+
+	.userinfo-avatar {
+		overflow: hidden;
+		display: block;
+		width: 160upx;
+		height: 160upx;
+		margin: 20upx;
+		margin-top: 50upx;
+		border-radius: 50%;
+		border: 4upx solid #fff;
+		box-shadow: 6upx 6upx 20upx rgba(0, 0, 0, 0.2);
 	}
 
 	.login-btn {

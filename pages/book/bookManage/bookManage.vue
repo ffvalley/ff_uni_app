@@ -9,7 +9,9 @@
 					<image class="next" src="/static/img/common/icon_next_right.png"></image>
 				</view>
 			</view>
-			<view class="seat"></view>
+			<view class="seat" v-if="bookList.length>0"></view>
+			<Exception style='width: 100vw; flex: 1;' v-else :imageUrl="'../../static/img/common/icon_is_null.png'" :desc="'抱歉，您还没有账本哦'"
+			 @tap='getAllBook'></Exception>
 			<view class="common-button-enable" style="width: 90%;" @tap="onShowDialog">新建账本</view>
 		</view>
 
@@ -35,7 +37,11 @@
 	const netCode = require('../../../common/net/netCode.js');
 	const enums = require('../../../common/enums.js');
 	const router = require('../../../common/router.js');
+	import Exception from "../../../ui/components/exception.vue"
 	export default {
+		components: {
+			Exception, // 异常界面组件
+		},
 		data() {
 			return {
 				bookList: [],
@@ -44,11 +50,11 @@
 			};
 		},
 		onShow() {
-			this.netSelectAll()
+			this.getAllBook()
 		},
 		methods: {
 			// 查询所有账本
-			netSelectAll: function() {
+			getAllBook: function() {
 				let that = this
 				net.requestJson(api.book.selectAll, null, net.methodType.post, () => {
 					uni.showLoading({
@@ -65,24 +71,34 @@
 			},
 			// dialog的按钮事件
 			onDialog: function(val) {
-				this.isShowDialog = false
 				if (val === 1) {
-					// this.onCreateBook(this.bookName)
-				} else {}
+					this.onCreateBook(this.bookName)
+				} else {
+					this.isShowDialog = false
+				}
 			},
 			// 创建新账本
 			onCreateBook: function(bookName) {
 				let that = this
-				let params = {
-					bookName: bookName
-				}
-				net.requestForm(api.book.creatBook, params, net.methodType.post, () => {
-					uni.showLoading({
-						title: '正在加载',
+				if (!bookName) {
+					uni.showToast({
+						title: '请输入账单名称',
+						icon: 'none'
 					})
-				}, (data) => {
-					uni.hideLoading()
-				}, (res) => {})
+				} else {
+					that.isShowDialog = false
+					let params = {
+						bookName: bookName
+					}
+					net.requestForm(api.book.creatBook, params, net.methodType.post, () => {
+						uni.showLoading({
+							title: '正在加载',
+						})
+					}, (data) => {
+						that.getAllBook()
+						uni.hideLoading()
+					}, (res) => {})
+				}
 			}
 		}
 	}
@@ -144,6 +160,30 @@
 				margin-right: 40upx;
 				margin-left: 20upx;
 			}
+		}
+	}
+
+	// 无数据状态
+	.no-data {
+		display: flex;
+		flex: 1;
+		width: 100vw;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		.img {
+			width: 200upx;
+			height: 200upx;
+		}
+
+		.desc {
+			font-size: 24upx;
+			font-family: PingFangSC-Regular, PingFang SC;
+			font-weight: 400;
+			color: rgba(153, 153, 153, 1);
+			line-height: 34upx;
+			margin-top: 40upx;
 		}
 	}
 
