@@ -44,3 +44,19 @@
 	color: white;
 	@extend .common-button-unable;
 }
+
+/* 提示语 - 灰色 */
+.common-tip-gray {
+	font-size: 24upx;
+	font-weight: 400;
+	color: rgba(153, 153, 153, 1);
+}
+
+/* 输入框 */
+.common-input {
+	background:rgba(142,142,147,0.12);
+	border-radius:20upx;
+	padding: 0 20upx;
+	font-size: 32upx;
+	color: rgba(51,51,51,1);
+}

@@ -10,19 +10,19 @@
 				</view>
 			</view>
 			<view class="seat"></view>
-			<view class="common-button-enable" style="width: 90%;" @tap="onShowDialog(true)">新建账本</view>
+			<view class="common-button-enable" style="width: 90%;" @tap="onShowDialog">新建账本</view>
 		</view>
-		
-		<view class="common-mongolia-container" v-if="isShowDialog" @tap="onShowDialog(false)">
-			<view class="content-container">
+
+		<view class="common-mongolia-container" v-if="isShowDialog">
+			<view class="common-column-container content-container">
 				<view class="title">新建账本</view>
-				<view class="content">
-					<view>账本昵称</view>
-					<input />
+				<view class="common-column-container content">
+					<view class="common-tip-gray" style="width: 500upx;">账本昵称</view>
+					<input class="common-input input" v-model="bookName" />
 				</view>
 				<view class="common-row-container" style="width: 600upx;">
-					<view class="common-button-unable" style="flex: 1;">取消</view>
-					<view class="common-button-enable" style="flex: 1;">确认</view>
+					<view class="common-button-unable" style="flex: 1;" @tap="onDialog(0)">取消</view>
+					<view class="common-button-enable" style="flex: 1;" @tap="onDialog(1)">确认</view>
 				</view>
 			</view>
 		</view>
@@ -39,7 +39,8 @@
 		data() {
 			return {
 				bookList: [],
-				isShowDialog: false
+				isShowDialog: false,
+				bookName: '',
 			};
 		},
 		onShow() {
@@ -59,15 +60,21 @@
 				}, (res) => {})
 			},
 			// 显示Dialog
-			onShowDialog: function(val) {
-				this.isShowDialog = val
+			onShowDialog: function() {
+				this.isShowDialog = true
+			},
+			// dialog的按钮事件
+			onDialog: function(val) {
+				this.isShowDialog = false
+				if (val === 1) {
+					// this.onCreateBook(this.bookName)
+				} else {}
 			},
 			// 创建新账本
-			onCreateBook: function() {
-
+			onCreateBook: function(bookName) {
 				let that = this
 				let params = {
-					// bookName: '测试账本-哈哈02'
+					bookName: bookName
 				}
 				net.requestForm(api.book.creatBook, params, net.methodType.post, () => {
 					uni.showLoading({
@@ -76,7 +83,7 @@
 				}, (data) => {
 					uni.hideLoading()
 				}, (res) => {})
-			},
+			}
 		}
 	}
 </script>
@@ -146,10 +153,6 @@
 		min-height: 640upx;
 		background: $uni-color-white;
 		border-radius: 20upx;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
 
 		.title {
 			font-size: 32upx;
@@ -161,6 +164,12 @@
 		.content {
 			flex: 1;
 			width: 630upx;
+
+			.input {
+				width: 470upx;
+				height: 70upx;
+				margin-top: 30upx;
+			}
 		}
 	}
 </style>
