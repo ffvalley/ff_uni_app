@@ -15,6 +15,12 @@
 			return {
 				
 			};
+		},
+		onLoad:function(options){
+			console.log("onLoad - options", options)
+		},
+		methods:{
+			
 		}
 	}
 </script>

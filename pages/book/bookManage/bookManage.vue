@@ -2,7 +2,7 @@
 	<view class="page-container">
 		<view class="page-container">
 			<view class="menu-list-container" v-if="bookList.length>0">
-				<view class="item_container" v-for="(item, index) in bookList" :key='index'>
+				<view class="item_container" v-for="(item, index) in bookList" :key='index' @tap="toDetail(bookList[index].bookId)">
 					<image class="icon" src="/static/img/me/icon_account_book.png"></image>
 					<text class="title">{{item.bookName}}</text>
 					<text class="num">参与 {{item.count}}人</text>
@@ -99,6 +99,13 @@
 						uni.hideLoading()
 					}, (res) => {})
 				}
+			},
+			toDetail: function(bookId) {
+				console.log("toDetail - bookId - ", bookId)
+				let params = {
+					bookId: bookId
+				}
+				router.toPage('/pages/book/bookDetail/bookDetail', params, router.routerType.NAVIGATE_TO)
 			}
 		}
 	}
